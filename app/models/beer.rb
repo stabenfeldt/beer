@@ -23,8 +23,8 @@ class Beer
     (sun_from..sun_to).cover? Time.now
   end
 
-  def self.places_with_sun_now(beers)
-    beers.select { |b| b.has_sun_now? }
+  def self.places_with_sun_now
+    Beer.all.select { |b| b.has_sun_now? }
   end
 
 end
