@@ -1,11 +1,10 @@
 class FirstViewController < UITableViewController
    def viewDidLoad
     super
-    Dispatch::Queue.concurrent('mc-data').async {
-      areas_string = File.read("#{App.resources_path}/areas.json")
-      @areas = BW::JSON.parse areas_string
+    if Beer.all.size == 0
+      create_beer_objects_from_json_file
       view.reloadData
-    }
+    end
     puts @areas
     #view.dataSource = view.delegate = self
     #@areas = Beer.all
@@ -22,7 +21,6 @@ class FirstViewController < UITableViewController
     @areas ? @areas.size : 0
   end
 
-  CELLID = 'CellIdentifier'
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     cellIdentifier = self.class.name
     cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) || begin
@@ -41,6 +39,32 @@ class FirstViewController < UITableViewController
     area_controller = AreaTableViewController.alloc.init
     self.navigationController.pushViewController(area_controller, animated:true)
     area_controller.bind_with_area(area)
+  end
+
+
+  def create_beer_objects_from_json_file
+    @areas = read_from_json_file
+    puts "Areas are #{@areas.inspect}"
+    @areas.each do |area|
+      area['venues'].each do |place|
+        Beer.create(
+          name:      place['name'],
+          sun_to:    place['sun_to'],
+          sun_from:  place['sun_from'],
+          longitude: place['longitude'],
+          latitude:  place['latitude'],
+          url:       place['latitude']
+        )
+      end
+    end
+  end
+
+  def read_from_json_file 
+    #Dispatch::Queue.concurrent('mc-data').async {
+      areas_string = File.read("#{App.resources_path}/areas.json")
+      @areas = BW::JSON.parse areas_string
+    #}
+    @areas
   end
   
 end
