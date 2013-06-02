@@ -41,9 +41,8 @@ class Beer
           name:      place['name'],
           sun_to:    place['sun_to'],
           sun_from:  place['sun_from'],
-          longitude: place['longitude'],
-          latitude:  place['latitude'],
-          url:       place['latitude']
+          url:       place['url'],
+          :location => {latitude: place['latitude'], longitude: place['longitude']},
         )
       end
     end
