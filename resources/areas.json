@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Grünerløkka",
+    "venues":
+      [
+        {
+          "name": "Parkteateret",
+          "url": "http://db.no",
+          "latitude": 59.923469, 
+          "longitude": 10.758304,
+          "sun_from": "09:00",
+          "sun_to": "22:00"
+        },
+        {
+          "name": "Ryes",
+          "latitude": 59.923469, 
+          "longitude": 10.758304,
+          "url": "http://db.no",
+          "sun_from": "11:00",
+          "sun_to": "20:00"
+        }
+      ]
+  }
+]
