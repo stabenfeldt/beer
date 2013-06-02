@@ -9,7 +9,7 @@ class FirstViewController < UITableViewController
     puts @areas
     #view.dataSource = view.delegate = self
     #@areas = Beer.all
-    self.title = "AreaListController"
+    self.title = "Bydeler"
     return @areas
   end
 
