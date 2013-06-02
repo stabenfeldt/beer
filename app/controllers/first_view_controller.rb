@@ -1,10 +1,8 @@
 class FirstViewController < UITableViewController
    def viewDidLoad
     super
-    if Beer.all.size == 0
-      create_beer_objects_from_json_file
-      view.reloadData
-    end
+    @areas = Beer.populate_if_empty
+    view.reloadData
     puts @areas
     #view.dataSource = view.delegate = self
     #@areas = Beer.all
@@ -42,29 +40,4 @@ class FirstViewController < UITableViewController
   end
 
 
-  def create_beer_objects_from_json_file
-    @areas = read_from_json_file
-    puts "Areas are #{@areas.inspect}"
-    @areas.each do |area|
-      area['venues'].each do |place|
-        Beer.create(
-          name:      place['name'],
-          sun_to:    place['sun_to'],
-          sun_from:  place['sun_from'],
-          longitude: place['longitude'],
-          latitude:  place['latitude'],
-          url:       place['latitude']
-        )
-      end
-    end
-  end
-
-  def read_from_json_file 
-    #Dispatch::Queue.concurrent('mc-data').async {
-      areas_string = File.read("#{App.resources_path}/areas.json")
-      @areas = BW::JSON.parse areas_string
-    #}
-    @areas
-  end
-  
 end
