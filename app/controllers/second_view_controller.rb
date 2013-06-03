@@ -16,8 +16,6 @@ class SecondViewController < UIViewController
 
   def viewDidLoad
     view.frame = tabBarController.view.bounds
-
-    # Oslo => 59.9494° N, 10.7564° E
     region = MKCoordinateRegionMake(CLLocationCoordinate2D.new(59.911309, 10.751903), MKCoordinateSpanMake(0.04, 0.04))
     self.view.setRegion(region)
     Beer.places_with_sun_now.each { |beer| self.view.addAnnotation(beer) }

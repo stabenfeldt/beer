@@ -4,15 +4,11 @@ class FirstViewController < UITableViewController
     @areas = Beer.populate_if_empty
     view.reloadData
     puts @areas
-    #view.dataSource = view.delegate = self
-    #@areas = Beer.all
     self.title = "Bydeler"
     return @areas
   end
 
   def viewWillAppear(animated)
-    #navigationController.setNavigationBarHidden(true, animated:true)
-    #self.navigationController.pushViewController(self, animated: true)
   end    
 
   def tableView(tableView, numberOfRowsInSection:section)
