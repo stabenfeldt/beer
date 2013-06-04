@@ -45,7 +45,7 @@ class AreaTableViewController < UITableViewController
 
     venue = @area['venues'][indexPath.row]
     cell.textLabel.text = venue['name']
-    cell.detailTextLabel.text = "Sol fra #{venue['sun_from']} til #{venue['sun_to']}"
+    cell.detailTextLabel.text = "Åpent fra #{venue['open_from']} til #{venue['open_to']}"
     cell
   end
 

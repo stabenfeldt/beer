@@ -5,26 +5,23 @@ class Beer
   columns location: :hash,
           name:     :string,
           url:      :string,
-          sun_from: :date,
-          sun_to:   :date
+          open_from: :date,
+          open_to:   :date
   
 
   def title;      name;       end
   def url;        url;        end
 
   def coordinate
-    loc           = CLLocationCoordinate2D.new
-    loc.latitude  = location[:latitude]
-    loc.longitude = location[:longitude]
-    loc
+    CLLocationCoordinate2D.new(location[:latitude], location[:longitude])
   end
 
-  def has_sun_now?
-    (sun_from..sun_to).cover? Time.now
+  def store_open?
+    (open_from..open_to).cover? Time.now
   end
 
-  def self.places_with_sun_now
-    Beer.all.select { |b| b.has_sun_now? }
+  def self.open_now
+    Beer.all.select { |b| b.store_open? }
   end
 
   def self.populate_if_empty
@@ -39,8 +36,8 @@ class Beer
       area['venues'].each do |place|
         Beer.create(
           name:      place['name'],
-          sun_to:    place['sun_to'],
-          sun_from:  place['sun_from'],
+          open_to:    place['open_to'],
+          open_from:  place['open_from'],
           url:       place['url'],
           :location => {latitude: place['latitude'], longitude: place['longitude']},
         )

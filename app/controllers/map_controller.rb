@@ -18,7 +18,7 @@ class MapController < UIViewController
     view.frame = tabBarController.view.bounds
     region = MKCoordinateRegionMake(CLLocationCoordinate2D.new(59.911309, 10.751903), MKCoordinateSpanMake(0.04, 0.04))
     self.view.setRegion(region)
-    Beer.places_with_sun_now.each do |beer| 
+    Beer.open_now.each do |beer| 
       shadow = DummyAnnotation.new
       shadow.title = beer.title
       shadow.longitude = beer.location[:longitude]
