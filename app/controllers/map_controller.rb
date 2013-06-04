@@ -23,8 +23,9 @@ class MapController < UIViewController
       shadow.title = beer.title
       shadow.longitude = beer.location[:longitude]
       shadow.latitude  = beer.location[:latitude]
-      @brewery = WeakRef.new(shadow)
-      self.view.addAnnotation(@brewery)
+      beer.dummy_annotation = shadow
+      #@brewery = WeakRef.new(beer.dummy_annotation)
+      self.view.addAnnotation(beer.dummy_annotation)
     end
   end
 

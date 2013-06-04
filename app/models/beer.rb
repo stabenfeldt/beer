@@ -1,6 +1,7 @@
 class Beer
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
+  attr_accessor :dummy_annotation
   
   columns location: :hash,
           name:     :string,
