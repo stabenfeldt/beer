@@ -1,4 +1,4 @@
-class SecondViewController < UIViewController
+class MapController < UIViewController
   def init
     if super
       self.tabBarItem = UITabBarItem.alloc.initWithTitle('Map', image:UIImage.imageNamed('map.png'), tag:1)
@@ -18,7 +18,14 @@ class SecondViewController < UIViewController
     view.frame = tabBarController.view.bounds
     region = MKCoordinateRegionMake(CLLocationCoordinate2D.new(59.911309, 10.751903), MKCoordinateSpanMake(0.04, 0.04))
     self.view.setRegion(region)
-    Beer.places_with_sun_now.each { |beer| self.view.addAnnotation(beer) }
+    Beer.places_with_sun_now.each do |beer| 
+      shadow = DummyAnnotation.new
+      shadow.title = beer.title
+      shadow.longitude = beer.location[:longitude]
+      shadow.latitude  = beer.location[:latitude]
+      @brewery = WeakRef.new(shadow)
+      self.view.addAnnotation(@brewery)
+    end
   end
 
   def viewWillAppear(animated)
