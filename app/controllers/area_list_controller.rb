@@ -16,8 +16,10 @@ class AreaListController  < UITableViewController
     return @areas
   end
 
-  def viewWillAppear(animated)
-  end    
+  def viewWillAppear( animated ) 
+    navigationController.setNavigationBarHidden( false, animated: true ) 
+    true 
+  end 
 
   def tableView(tableView, numberOfRowsInSection:section)
     @areas ? @areas.size : 0
