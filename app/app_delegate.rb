@@ -7,7 +7,22 @@ class AppDelegate
     tabbar.viewControllers     = [area_list_controller, map_controller]
     tabbar.title               = NSBundle.mainBundle.infoDictionary["CFBundleName"]
     @window.rootViewController = UINavigationController.alloc.initWithRootViewController(tabbar)
+
+    @window.rootViewController.wantsFullScreenLayout = true
+    #Splash Screen
+    image_view = UIImageView.alloc.initWithImage(UIImage.imageNamed("Default.png"))
+    @window.rootViewController.view.addSubview(image_view)
+    @window.rootViewController.view.bringSubviewToFront(image_view)
+    # normal
     @window.makeKeyAndVisible
+    # fade out splash image
+    fade_out_timer = 1.0
+    UIView.transitionWithView(@window, duration:fade_out_timer, options:UIViewAnimationOptionTransitionNone, animations: lambda {image_view.alpha = 0}, completion: lambda do |finished|
+      image_view.removeFromSuperview
+      image_view = nil
+      #UIApplication.sharedApplication.setStatusBarHidden(false, animated:false)
+     end)
+
     true
   end
 
