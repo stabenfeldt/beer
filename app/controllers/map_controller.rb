@@ -23,6 +23,7 @@ class MapController < UIViewController
       shadow.title          = beer.title
       shadow.longitude      = beer.location[:longitude]
       shadow.latitude       = beer.location[:latitude]
+      shadow.subtitle       = "Åpent fra #{beer.open_from.strftime '%H:%M'} til #{beer.open_to.strftime '%H:%M'}"
       beer.dummy_annotation = shadow
       self.view.addAnnotation(beer.dummy_annotation)
     end
