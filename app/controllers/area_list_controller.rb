@@ -4,10 +4,13 @@ class AreaListController  < UITableViewController
     self.tabBarItem =
       UITabBarItem.alloc.initWithTitle(
         "Areas",
-        image: nil,
+        image:UIImage.imageNamed('list.png'),
         tag: 1)
     self
   end
+
+  
+  
 
   def viewDidLoad
     super
