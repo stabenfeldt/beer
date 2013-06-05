@@ -13,5 +13,5 @@ Motion::Project::App.setup do |app|
   app.frameworks += ['CoreLocation', 'MapKit', 'AddressBook']
   
 
-  app.name = 'Scaffold'
+  app.name = 'Beer Places'
 end
