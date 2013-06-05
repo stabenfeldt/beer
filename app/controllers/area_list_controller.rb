@@ -1,10 +1,18 @@
 class AreaListController  < UITableViewController
-   def viewDidLoad
+  def initWithNibName(name, bundle: bundle)
+    super
+    self.tabBarItem =
+      UITabBarItem.alloc.initWithTitle(
+        "Areas",
+        image: nil,
+        tag: 1)
+    self
+  end
+
+  def viewDidLoad
     super
     @areas = Beer.populate_if_empty
     view.reloadData
-    puts @areas
-    self.title = "Bydeler"
     return @areas
   end
 
