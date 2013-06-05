@@ -5,6 +5,7 @@ class Beer
   
   columns location: :hash,
           name:     :string,
+          address:  :string,
           url:      :string,
           open_from: :date,
           open_to:   :date
@@ -37,8 +38,9 @@ class Beer
       area['venues'].each do |place|
         Beer.create(
           name:      place['name'],
-          open_to:    place['open_to'],
-          open_from:  place['open_from'],
+          address:   place['address'],
+          open_to:   place['open_to'],
+          open_from: place['open_from'],
           url:       place['url'],
           :location => {latitude: place['latitude'], longitude: place['longitude']},
         )
