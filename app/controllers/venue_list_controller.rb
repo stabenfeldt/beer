@@ -1,4 +1,11 @@
-class AreaTableViewController < UITableViewController
+class VenueListController < UITableViewController
+  def init
+    if super
+      self.tabBarItem = UITabBarItem.alloc.initWithTitle('VenueList', image:UIImage.imageNamed('map.png'), tag:1)
+    end
+    self
+  end
+
   def viewDidLoad
     super
     # Uncomment the following line to preserve selection between presentations.

@@ -38,9 +38,9 @@ class AreaListController  < UITableViewController
 
   def tableView(tableView, accessoryButtonTappedForRowWithIndexPath:indexPath)
     area = @areas[indexPath.row]
-    area_controller = AreaTableViewController.alloc.init
-    self.navigationController.pushViewController(area_controller, animated:true)
-    area_controller.bind_with_area(area)
+    venue_list_controller = VenueListController.alloc.init
+    self.navigationController.pushViewController(venue_list_controller, animated:true)
+    venue_list_controller.bind_with_area(area)
   end
 
 
