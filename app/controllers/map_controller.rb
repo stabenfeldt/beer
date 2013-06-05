@@ -7,10 +7,10 @@ class MapController < UIViewController
   end
 
   def loadView
-    self.view = MKMapView.alloc.init
+    self.view     = MKMapView.alloc.init
     view.delegate = self
-    @areas = Beer.populate_if_empty
-    self.title = "Map"
+    @areas        = Beer.populate_if_empty
+    self.title    = "Map"
     return @areas
   end
 
@@ -19,12 +19,11 @@ class MapController < UIViewController
     region = MKCoordinateRegionMake(CLLocationCoordinate2D.new(59.911309, 10.751903), MKCoordinateSpanMake(0.04, 0.04))
     self.view.setRegion(region)
     Beer.open_now.each do |beer| 
-      shadow = DummyAnnotation.new
-      shadow.title = beer.title
-      shadow.longitude = beer.location[:longitude]
-      shadow.latitude  = beer.location[:latitude]
+      shadow                = DummyAnnotation.new
+      shadow.title          = beer.title
+      shadow.longitude      = beer.location[:longitude]
+      shadow.latitude       = beer.location[:latitude]
       beer.dummy_annotation = shadow
-      #@brewery = WeakRef.new(beer.dummy_annotation)
       self.view.addAnnotation(beer.dummy_annotation)
     end
   end
@@ -38,10 +37,10 @@ class MapController < UIViewController
     if view = mapView.dequeueReusableAnnotationViewWithIdentifier(ViewIdentifier)
       view.annotation = beer
     else
-      view = MKPinAnnotationView.alloc.initWithAnnotation(beer, reuseIdentifier:ViewIdentifier)
+      view                = MKPinAnnotationView.alloc.initWithAnnotation(beer, reuseIdentifier:ViewIdentifier)
       view.canShowCallout = true
-      view.animatesDrop = true
-      button = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
+      view.animatesDrop   = true
+      button              = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
       button.addTarget(self, action: :'showDetails:', forControlEvents:UIControlEventTouchUpInside)
       view.rightCalloutAccessoryView = button
     end

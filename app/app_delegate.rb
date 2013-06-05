@@ -1,11 +1,11 @@
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
-    @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    tabbar = UITabBarController.alloc.init
-    area_list_controller = AreaListController.alloc.init
-    map_controller = MapController.alloc.init
-    tabbar.viewControllers = [area_list_controller, map_controller]
-    tabbar.title = NSBundle.mainBundle.infoDictionary["CFBundleName"]
+    @window                    = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+    tabbar                     = UITabBarController.alloc.init
+    area_list_controller       = AreaListController.alloc.init
+    map_controller             = MapController.alloc.init
+    tabbar.viewControllers     = [area_list_controller, map_controller]
+    tabbar.title               = NSBundle.mainBundle.infoDictionary["CFBundleName"]
     @window.rootViewController = UINavigationController.alloc.initWithRootViewController(tabbar)
     @window.makeKeyAndVisible
     true
