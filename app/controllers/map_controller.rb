@@ -1,7 +1,7 @@
 class MapController < UIViewController
   def init
     if super
-      self.tabBarItem = UITabBarItem.alloc.initWithTitle('Map', image:UIImage.imageNamed('map.png'), tag:1)
+      self.tabBarItem = UITabBarItem.alloc.initWithTitle('Uteservering med sol nå', image:UIImage.imageNamed('map.png'), tag:1)
     end
     self
   end
@@ -10,7 +10,7 @@ class MapController < UIViewController
     self.view     = MKMapView.alloc.init
     view.delegate = self
     @areas        = Beer.populate_if_empty
-    self.title    = "Map"
+    self.title    = "Uteservering med sol nå"
     return @areas
   end
 

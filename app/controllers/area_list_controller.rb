@@ -3,7 +3,7 @@ class AreaListController  < UITableViewController
     super
     self.tabBarItem =
       UITabBarItem.alloc.initWithTitle(
-        "Areas",
+        "Bydeler",
         image:UIImage.imageNamed('list.png'),
         tag: 1)
     self
