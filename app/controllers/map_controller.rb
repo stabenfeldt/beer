@@ -9,7 +9,7 @@ class MapController < UIViewController
   def loadView
     self.view     = MKMapView.alloc.init
     view.delegate = self
-    @areas        = Beer.populate_if_empty
+    @areas      ||= Beer.populate_if_empty
     self.title    = "Uteservering med sol nå"
     return @areas
   end
