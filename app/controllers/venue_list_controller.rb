@@ -52,8 +52,12 @@ class VenueListController < UITableViewController
 
     venue = @area['venues'][indexPath.row]
     cell.textLabel.text = venue['name']
-    cell.detailTextLabel.text = "Åpent fra #{venue['open_from']} til #{venue['open_to']}"
+    cell.detailTextLabel.text = "Sol #{nice_time(venue['sun_from'])} til #{nice_time(venue['sun_to'])}"
     cell
+  end
+
+  def nice_time(string)
+    Time.at( NSDate.dateWithNaturalLanguageString(string) ).strftime '%H:%M'
   end
 
 =begin
