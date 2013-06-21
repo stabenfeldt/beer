@@ -7,8 +7,8 @@ class Beer
           name:     :string,
           address:  :string,
           url:      :string,
-          open_from: :date,
-          open_to:   :date
+          sun_from: :date,
+          sun_to:   :date
   
 
   def title;      name;       end
@@ -18,12 +18,12 @@ class Beer
     CLLocationCoordinate2D.new(location[:latitude], location[:longitude])
   end
 
-  def store_open?
-    (open_from..open_to).cover? Time.now
+  def sun_now?
+    (sun_from..sun_to).cover? Time.now
   end
 
-  def self.open_now
-    Beer.all.select { |b| b.store_open? }
+  def self.sun_now
+    Beer.all.select { |b| b.sun_now? }
   end
 
   def self.populate_if_empty
@@ -33,16 +33,20 @@ class Beer
   private 
   def self.create_beer_objects_from_json_file
     @areas = read_from_json_file
-    puts "Areas are #{@areas.inspect}"
     @areas.each do |area|
+      next unless area['venues'].size
       area['venues'].each do |place|
+        next unless place
         Beer.create(
           name:      place['name'],
           address:   place['address'],
-          open_to:   place['open_to'],
-          open_from: place['open_from'],
+          sun_to:    place['sun_to'],
+          sun_from:  place['sun_from'],
           url:       place['url'],
-          :location => {latitude: place['latitude'], longitude: place['longitude']},
+            :location => {
+              latitude: place['latitude'], 
+              longitude: place['longitude']
+            },
         )
       end
     end
