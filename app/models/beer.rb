@@ -12,7 +12,6 @@ class Beer
   
 
   def title;      name;       end
-  def url;        url;        end
 
   def coordinate
     CLLocationCoordinate2D.new(location[:latitude], location[:longitude])

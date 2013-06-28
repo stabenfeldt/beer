@@ -8,8 +8,9 @@ class BeerDetailsController < UIViewController
   end
 
   def showDetailsForBeer(beer)
-    navigationItem.title = beer['title']
-    request = NSURLRequest.requestWithURL(beer['url'])
+    navigationItem.title = beer.title
+    nsurl   = NSURL.URLWithString(beer.url)
+    request = NSURLRequest.requestWithURL(nsurl)
     view.loadRequest(request)
   end 
 end

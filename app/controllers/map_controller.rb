@@ -21,6 +21,7 @@ class MapController < UIViewController
     Beer.sun_now.each do |beer| 
       shadow                = DummyAnnotation.new
       shadow.title          = beer.title
+      shadow.url            = beer.url 
       shadow.longitude      = beer.location[:longitude]
       shadow.latitude       = beer.location[:latitude]
       shadow.subtitle       = "Sol #{beer.sun_from.strftime '%H:%M'} - #{beer.sun_to.strftime '%H:%M'}" +
