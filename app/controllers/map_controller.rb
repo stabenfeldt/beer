@@ -18,12 +18,12 @@ class MapController < UIViewController
     view.frame = tabBarController.view.bounds
     region = MKCoordinateRegionMake(CLLocationCoordinate2D.new(59.911309, 10.751903), MKCoordinateSpanMake(0.04, 0.04))
     self.view.setRegion(region)
-    Beer.open_now.each do |beer| 
+    Beer.sun_now.each do |beer| 
       shadow                = DummyAnnotation.new
       shadow.title          = beer.title
       shadow.longitude      = beer.location[:longitude]
       shadow.latitude       = beer.location[:latitude]
-      shadow.subtitle       = "Sol #{beer.open_from.strftime '%H:%M'} - #{beer.open_to.strftime '%H:%M'}" +
+      shadow.subtitle       = "Sol #{beer.sun_from.strftime '%H:%M'} - #{beer.sun_to.strftime '%H:%M'}" +
                               "  " + beer.address
       beer.dummy_annotation = shadow
       self.view.addAnnotation(beer.dummy_annotation)
