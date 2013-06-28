@@ -14,7 +14,7 @@ class AreaListController  < UITableViewController
 
   def viewDidLoad
     super
-    @areas = Beer.populate_if_empty
+    @areas = Venue.populate_if_empty
     view.reloadData
     return @areas
   end

@@ -9,7 +9,7 @@ class MapController < UIViewController
   def loadView
     self.view     = MKMapView.alloc.init
     view.delegate = self
-    @areas      ||= Beer.populate_if_empty
+    @areas      ||= Venue.populate_if_empty
     self.title    = "Uteservering med sol nå"
     return @areas
   end
@@ -18,16 +18,16 @@ class MapController < UIViewController
     view.frame = tabBarController.view.bounds
     region = MKCoordinateRegionMake(CLLocationCoordinate2D.new(59.911309, 10.751903), MKCoordinateSpanMake(0.04, 0.04))
     self.view.setRegion(region)
-    Beer.sun_now.each do |beer| 
+    Venue.sun_now.each do |venue| 
       shadow                = DummyAnnotation.new
-      shadow.title          = beer.title
-      shadow.url            = beer.url 
-      shadow.longitude      = beer.location[:longitude]
-      shadow.latitude       = beer.location[:latitude]
-      shadow.subtitle       = "Sol #{beer.sun_from.strftime '%H:%M'} - #{beer.sun_to.strftime '%H:%M'}" +
-                              "  " + beer.address
-      beer.dummy_annotation = shadow
-      self.view.addAnnotation(beer.dummy_annotation)
+      shadow.title          = venue.title
+      shadow.url            = venue.url 
+      shadow.longitude      = venue.location[:longitude]
+      shadow.latitude       = venue.location[:latitude]
+      shadow.subtitle       = "Sol #{venue.sun_from.strftime '%H:%M'} - #{venue.sun_to.strftime '%H:%M'}" +
+                              "  " + venue.address
+      venue.dummy_annotation = shadow
+      self.view.addAnnotation(venue.dummy_annotation)
     end
   end
 
@@ -36,11 +36,11 @@ class MapController < UIViewController
   end    
 
   ViewIdentifier = 'ViewIdentifier'
-  def mapView(mapView, viewForAnnotation:beer)
+  def mapView(mapView, viewForAnnotation:venue)
     if view = mapView.dequeueReusableAnnotationViewWithIdentifier(ViewIdentifier)
-      view.annotation = beer
+      view.annotation = venue
     else
-      view                = MKPinAnnotationView.alloc.initWithAnnotation(beer, reuseIdentifier:ViewIdentifier)
+      view                = MKPinAnnotationView.alloc.initWithAnnotation(venue, reuseIdentifier:ViewIdentifier)
       view.canShowCallout = true
       view.animatesDrop   = true
       button              = UIButton.buttonWithType(UIButtonTypeDetailDisclosure)
@@ -52,10 +52,10 @@ class MapController < UIViewController
 
   def showDetails(sender)
     if view.selectedAnnotations.size == 1
-      beer = view.selectedAnnotations[0]
-      controller = UIApplication.sharedApplication.delegate.beer_details_controller
+      venue = view.selectedAnnotations[0]
+      controller = UIApplication.sharedApplication.delegate.venue_details_controller
       navigationController.pushViewController(controller, animated:true)
-      controller.showDetailsForBeer(beer)
+      controller.showDetailsForVenue(venue)
     end
   end
 end

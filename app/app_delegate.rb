@@ -26,8 +26,8 @@ class AppDelegate
     true
   end
 
-  def beer_details_controller
-    @beer_details_controller ||= BeerDetailsController.alloc.init
+  def venue_details_controller
+    @venue_details_controller ||= VenueDetailsController.alloc.init
   end
 
   def applicationWillResignActive(application)

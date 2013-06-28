@@ -1,4 +1,4 @@
-class BeerDetailsController < UIViewController
+class VenueDetailsController < UIViewController
   def loadView
     self.view = UIWebView.alloc.init
   end
@@ -7,9 +7,9 @@ class BeerDetailsController < UIViewController
     navigationController.setNavigationBarHidden(false, animated:true)
   end
 
-  def showDetailsForBeer(beer)
-    navigationItem.title = beer.title
-    nsurl   = NSURL.URLWithString(beer.url)
+  def showDetailsForVenue(venue)
+    navigationItem.title = venue.title
+    nsurl   = NSURL.URLWithString(venue.url)
     request = NSURLRequest.requestWithURL(nsurl)
     view.loadRequest(request)
   end 

@@ -1,4 +1,4 @@
-class Beer
+class Venue
   include MotionModel::Model
   include MotionModel::ArrayModelAdapter
   attr_accessor :dummy_annotation
@@ -22,7 +22,7 @@ class Beer
   end
 
   def self.sun_now
-    Beer.all.select { |b| b.sun_now? }
+    Venue.all.select { |b| b.sun_now? }
   end
 
   def self.populate_if_empty
@@ -36,7 +36,7 @@ class Beer
       next unless area['venues'].size
       area['venues'].each do |place|
         next unless place
-        Beer.create(
+        Venue.create(
           name:      place['name'],
           address:   place['address'],
           sun_to:    place['sun_to'],
